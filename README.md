@@ -8,7 +8,8 @@ OverlayJS is a simple JavaScript library, to display overlays.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Documentation](#documentation)
-  -
+  - [Overlay](#overlay)
+  - [OverlayManager](#overlaymanager)
   - [Events](#events)
   - [Options](#options)
 - [Example](#example)
@@ -62,19 +63,34 @@ After instanciating the overlay is shown (if not defined otherwise)
 
 #### Methods
 ```javascript
-overlay.open();              // Opens the overlay, if its not allready open
-overlay.close(force);        // Closes the overlay, if its not allready closed; if the force parameter is set, it will be closed for sure (boolean)
-overlay.isOpened();          // Returns true, if the overlay is open, otherwise false
+overlay.open();                  // Opens the overlay, if its not allready open
+overlay.close(force);            // Closes the overlay, if its not allready closed;
+                                 // if the force parameter is set, it will be closed for sure (boolean)
+overlay.isOpened();              // Returns true, if the overlay is open, otherwise false
 
-overlay.on(event, callback); // Sets the eventlistener of the event, if the callback is specified;
-                             // if only the event is set, it returns the callback-function; if that is not
-                             // set, it returns a empty function (string, function)
-overlay.removeOn(event);         // Removes the eventlistener for the event, if set
+overlay.on(event, callback);     // Sets the eventlistener of the event, if the callback is specified;
+                                 // if only the event is set, it returns the callback-function; if that is not
+                                 // set, it returns a empty function (string, function)
+overlay.removeOn(event);         // Removes the eventlistener for the event, if set (string)
 ```
 
 #### Variables
 ```javascript
-overlay.content              // A div, that contains the content of the overlay (edit this!)
+overlay.content                  // A div, that contains the content of the overlay (edit this!)
 
-Overlay.CLOSING_DURATION     // Sets, when the overlay is removed from the DOM after closing (ms)
+Overlay.CLOSING_DURATION         // Sets, when the overlay is removed from the DOM after closing (ms)
 ```
+
+### OverlayManager
+Its used to manage overlays, so that only one at a time is displayed. Can't be instanciated.
+#### Methods
+```javascript
+OverlayManager.create(options);  // Creates a new overlay, adds it to the manager and returns it;
+                                 // the returned overlay is not a instance of Overlay but
+                                 // of a anonymous type (object)
+OverlayManager.remove(overlay);  // Remove the overlay completely (can't open it again) (anonymous overlay-type)
+```
+The recieved overlay from the OverlayManager can be used normally.
+
+### Events
+It is possible to attach a event to a overlay: overlay.on(event, callback);
