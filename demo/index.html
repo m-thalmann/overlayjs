@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OverlayJS Test</title>
+
+  <link rel="stylesheet" href="../overlay.css">
+  <script src="../overlay.js"></script>
+
+  <script>
+    var o;
+
+    window.onload = function(){
+      o = new Overlay({
+        opened: false
+      });
+    };
+  </script>
+</head>
+<body>
+  <h1>OverlayJS Test</h1>
+  <button onclick="o.open();">Open Overlay</button>
+  <button onclick="o.content.innerHTML = prompt('Enter a new text:');">Change Text</button>
+</body>
+</html>
