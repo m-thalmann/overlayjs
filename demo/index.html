@@ -7,20 +7,19 @@
 
   <link rel="stylesheet" href="../overlay.css">
   <script src="../overlay.js"></script>
-
-  <script>
-    var o;
-
-    window.onload = function(){
-      o = new Overlay({
-        opened: false
-      });
-    };
-  </script>
 </head>
 <body>
   <h1>OverlayJS Test</h1>
-  <button onclick="o.open();">Open Overlay</button>
-  <button onclick="o.content.innerHTML = prompt('Enter a new text:');">Change Text</button>
+  <button onclick="overlay.open()">Open</button>
+  <script>
+    var overlay = new Overlay();
+
+    var btn_close = document.createElement("button");
+    btn_close.innerHTML = "Close";
+    btn_close.onclick = overlay.close;
+
+    overlay.content.appendChild(btn_close);
+    overlay.content.style.textAlign = "center";
+  </script>
 </body>
 </html>

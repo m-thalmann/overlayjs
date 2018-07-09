@@ -94,3 +94,34 @@ The recieved overlay from the OverlayManager can be used normally.
 
 ### Events
 It is possible to attach a event to a overlay: overlay.on(event, callback);
+
+| Event | Definition |
+|---------|------------------------------------------------------------------------------------------------------|
+| opening | Is triggered, before the overlay is opened; if the callback returns false, the overlay is not opened |
+| open | Is triggered, after the overlay is opened |
+| closing | Is triggered, before the overlay is closed; if the callback returns false, the overlay is not closed |
+| close | Is triggered, after the overlay is closed |
+
+### Options
+
+| Option | Values | Definition |
+|----------|------------|-------------------------------------------------------|
+| closable | true/false | Defines, if the overlay is closable by the user |
+| opened | true/false | Defines, if the overlay is opened on creation, or not |
+
+## Example
+### Code
+```javascript
+var overlay = new Overlay();
+
+var btn_close = document.createElement("button");
+btn_close.innerHTML = "Close";
+btn_close.onclick = overlay.close;
+
+overlay.content.appendChild(btn_close);
+overlay.content.style.textAlign = "center";
+```
+
+### Output
+
+![overlayJs example](demo/example.gif)
