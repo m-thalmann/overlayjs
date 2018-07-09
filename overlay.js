@@ -124,7 +124,6 @@ var OverlayManager = (function(){
       var pos = overlays.push(new Overlay(options)) - 1;
 
       var nov = new ManagedOverlay(pos);
-      console.log(to_open);
       if(to_open){
         nov.open();
       }
@@ -140,7 +139,9 @@ var OverlayManager = (function(){
   };
 
   function ManagedOverlay(pos){
-    this.content = overlays[pos].content;
+    this.content = document.createElement("div");
+    this.content.className = "overlay_content";
+    overlays[pos].content = this.content;
 
     this.open = function(){
       return open(pos);
