@@ -19,7 +19,7 @@ var Overlay = (function(){
 
     this.open = function(){
       if(open || self.on("opening")() === false){
-        return;
+        return false;
       }
 
       open = true;
@@ -28,9 +28,9 @@ var Overlay = (function(){
       self.on("open")();
     }
 
-    this.close = function(){
-      if(!open || self.on("closing")() === false){
-        return;
+    this.close = function(force){
+      if(!open || (!force && self.on("closing")() === false)){
+        return false;
       }
 
       overlay.classList.add("overlay_closing");
@@ -56,6 +56,10 @@ var Overlay = (function(){
 
     this.removeOn = function(ev){
       delete events[ev];
+    }
+
+    this.isOpened = function(){
+      return open;
     }
 
     //Init
@@ -98,4 +102,100 @@ var Overlay = (function(){
   }
 
   return Overlay;
+}());
+
+var OverlayManager = (function(){
+  var overlays = [];
+  var opened = -1;
+
+  const _manager = {
+    create(options){
+      if(typeof options === "undefined"){
+        options = {opened: true};
+      }
+      var to_open = false;
+
+      if(typeof options.opened !== "undefined"){
+        to_open = options.opened;
+      }
+
+      options.opened = false;
+
+      var pos = overlays.push(new Overlay(options)) - 1;
+
+      var nov = new ManagedOverlay(pos);
+      console.log(to_open);
+      if(to_open){
+        nov.open();
+      }
+
+      return nov;
+    },
+
+    remove(moverlay){
+      var pos = moverlay.getPos();
+      overlays[pos].close();
+      delete overlays[pos];
+    }
+  };
+
+  function ManagedOverlay(pos){
+    this.content = overlays[pos].content;
+
+    this.open = function(){
+      return open(pos);
+    }
+
+    this.close = function(force){
+      return close(pos, force);
+    }
+
+    this.on = function(ev, callback){
+      return overlays[pos].on(ev, callback);
+    }
+
+    this.removeOn = function(ev){
+      return overlays[pos].removeOn(ev);
+    }
+
+    this.isOpened = function(){
+      return overlays[pos].isOpened();
+    }
+
+    this.getPos = function(){
+      return pos;
+    }
+  }
+
+  function open(pos){
+    if(overlays[pos] instanceof Overlay){
+      if(opened != -1){
+        if(overlays[opened].close() !== false){
+          opened = pos;
+          overlays[pos].open();
+        }else{
+          console.warn("The currently open overlay does not want to be closed");
+        }
+      }else{
+        opened = pos;
+        overlays[pos].open();
+      }
+    }else{
+      throw new Error("This overlay has been deleted");
+    }
+  }
+
+  function close(pos, force){
+    if(overlays[pos] instanceof Overlay){
+      if(opened == pos){
+        if(overlays[pos].close(force) !== false){
+          opened = -1;
+        }
+      }
+    }else{
+      throw new Error("This overlay has been deleted");
+    }
+  }
+
+  return _manager;
 }());
