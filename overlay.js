@@ -1,13 +1,11 @@
 /**
-* A simple JavaScript library, to display overlays, alerts, prompts, confirms and toasts
+* A simple JavaScript library, to display overlays
 *
 * @author Matthias Thalmann (https://github.com/m-thalmann/)
 * @license MIT
 */
 
 var Overlay = (function(){
-  var CLOSING_DURATION = 500; //ms
-
   function Overlay(options){
     var overlay = document.createElement("div");
     overlay.className = "overlay";
@@ -39,7 +37,7 @@ var Overlay = (function(){
         overlay.classList.remove("overlay_closing");
         open = false;
         self.on("close")();
-      }, CLOSING_DURATION);
+      }, Overlay.CLOSING_DURATION);
     }
 
     this.on = function(ev, callback){
@@ -84,6 +82,8 @@ var Overlay = (function(){
       }
     }());
   }
+
+  Overlay.CLOSING_DURATION = 500; //ms
 
   function getProperty(options, opt, def){
     if(typeof options[opt] !== "undefined"){

@@ -1,1 +1,80 @@
-# overlayjs
+# overlayJS
+
+OverlayJS is a simple JavaScript library, to display overlays.
+
+**Demo:** https://m.thalmann.bz.it/prod/treejs/demo.html
+
+## Navigation
+- [Installation](#installation)
+- [Usage](#usage)
+- [Documentation](#documentation)
+  -
+  - [Events](#events)
+  - [Options](#options)
+- [Example](#example)
+
+## Installation
+1. Download the .zip-File and put it in your project-folder.
+
+2. Add this script-tag to the head of the file
+```html
+<script src="path/to/js/file.js"></script>
+```
+
+3. Add this link-tag to the head of the file, to include the styles
+```html
+<link rel="stylesheet" href="path/to/css/file.css" />
+```
+
+4. Start using the library!
+
+## Usage
+### Create new Overlay
+```javascript
+var overlay = new Overlay();
+```
+
+### Change the text
+```javascript
+overlay.content.innerHTML = "This is a overlay";
+```
+
+### Close it
+```javascript
+overlay.close();
+```
+
+### Open it again
+```javascript
+overlay.open();
+```
+
+## Documentation
+### Overlay
+Its the main object to display a overlay.
+#### Instanciating
+```javascript
+new Overlay(options);
+```
+- **options** (object): A object with options for the overlay (see [below](#options)) **(optional)**
+
+After instanciating the overlay is shown (if not defined otherwise)
+
+#### Methods
+```javascript
+overlay.open();              // Opens the overlay, if its not allready open
+overlay.close(force);        // Closes the overlay, if its not allready closed; if the force parameter is set, it will be closed for sure (boolean)
+overlay.isOpened();          // Returns true, if the overlay is open, otherwise false
+
+overlay.on(event, callback); // Sets the eventlistener of the event, if the callback is specified;
+                             // if only the event is set, it returns the callback-function; if that is not
+                             // set, it returns a empty function (string, function)
+overlay.removeOn(event);         // Removes the eventlistener for the event, if set
+```
+
+#### Variables
+```javascript
+overlay.content              // A div, that contains the content of the overlay (edit this!)
+
+Overlay.CLOSING_DURATION     // Sets, when the overlay is removed from the DOM after closing (ms)
+```
