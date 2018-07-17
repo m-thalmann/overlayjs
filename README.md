@@ -72,6 +72,8 @@ overlay.on(event, callback);     // Sets the eventlistener of the event, if the 
                                  // if only the event is set, it returns the callback-function; if that is not
                                  // set, it returns a empty function (string, function)
 overlay.removeOn(event);         // Removes the eventlistener for the event, if set (string)
+
+overlay.reset();                 // Resets the content of the overlay
 ```
 
 #### Variables
