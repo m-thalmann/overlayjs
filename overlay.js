@@ -41,6 +41,9 @@ var Overlay = (function(){
     }
 
     this.reset = function(){
+      if(self.content){
+        self.content.remove();
+      }
       self.content = document.createElement("div");
       self.content.className = "overlay_content";
     }
