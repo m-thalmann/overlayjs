@@ -6,6 +6,7 @@
   bottom: 0;
   animation: overlay_fadein 0.5s;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
 }
 
 .overlay.overlay_closing{
