@@ -40,6 +40,11 @@ var Overlay = (function(){
       }, Overlay.CLOSING_DURATION);
     }
 
+    this.reset = function(){
+      self.content = document.createElement("div");
+      self.content.className = "overlay_content";
+    }
+
     this.on = function(ev, callback){
       if(typeof callback !== "function"){
         if(typeof events[ev] === "function"){
@@ -66,8 +71,7 @@ var Overlay = (function(){
         options = {};
       }
 
-      self.content = document.createElement("div");
-      self.content.className = "overlay_content";
+      self.reset();
 
       if(getProperty(options, "closable", true)){
         overlay.addEventListener("click", function(e){
