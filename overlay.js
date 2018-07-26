@@ -33,7 +33,7 @@ var Overlay = (function(){
 
       overlay.classList.add("overlay_closing");
       setTimeout(function(){
-        overlay.remove();
+        overlay.parentNode.removeChild(overlay);
         overlay.classList.remove("overlay_closing");
         open = false;
         self.on("close")();
@@ -116,7 +116,7 @@ var OverlayManager = (function(){
   var opened = -1;
 
   const _manager = {
-    create(options){
+    create: function(options){
       if(typeof options === "undefined"){
         options = {opened: true};
       }
@@ -138,7 +138,7 @@ var OverlayManager = (function(){
       return nov;
     },
 
-    remove(moverlay){
+    remove: function(moverlay){
       var pos = moverlay.getPos();
       overlays[pos].close();
       delete overlays[pos];
