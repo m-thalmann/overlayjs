@@ -24,7 +24,7 @@ var Overlay = (function(){
       overlay.appendChild(this.content);
       document.body.appendChild(overlay);
       self.on("open")();
-    }
+    };
 
     this.close = function(force){
       if(!open || (!force && self.on("closing")() === false)){
@@ -38,7 +38,7 @@ var Overlay = (function(){
         open = false;
         self.on("close")();
       }, Overlay.CLOSING_DURATION);
-    }
+    };
 
     this.reset = function(){
       if(self.content){
@@ -46,7 +46,7 @@ var Overlay = (function(){
       }
       self.content = document.createElement("div");
       self.content.className = "overlay_content";
-    }
+    };
 
     this.on = function(ev, callback){
       if(typeof callback !== "function"){
@@ -58,15 +58,15 @@ var Overlay = (function(){
       }else{
         events[ev] = callback;
       }
-    }
+    };
 
     this.removeOn = function(ev){
       delete events[ev];
-    }
+    };
 
     this.isOpened = function(){
       return open;
-    }
+    };
 
     //Init
     (function(){
@@ -152,27 +152,27 @@ var OverlayManager = (function(){
 
     this.open = function(){
       return open(pos);
-    }
+    };
 
     this.close = function(force){
       return close(pos, force);
-    }
+    };
 
     this.on = function(ev, callback){
       return overlays[pos].on(ev, callback);
-    }
+    };
 
     this.removeOn = function(ev){
       return overlays[pos].removeOn(ev);
-    }
+    };
 
     this.isOpened = function(){
       return overlays[pos].isOpened();
-    }
+    };
 
     this.getPos = function(){
       return pos;
-    }
+    };
   }
 
   function open(pos){
