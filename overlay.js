@@ -23,6 +23,7 @@ var Overlay = (function(){
       open = true;
       overlay.appendChild(this.content);
       document.body.appendChild(overlay);
+      document.body.style.overflow = 'hidden';
       self.on("open")();
     };
 
@@ -30,6 +31,8 @@ var Overlay = (function(){
       if(!open || (!force && self.on("closing")() === false)){
         return false;
       }
+
+      document.body.style.overflow = null;
 
       overlay.classList.add("overlay_closing");
       setTimeout(function(){
