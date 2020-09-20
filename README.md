@@ -2,7 +2,7 @@
 
 OverlayJS is a simple JavaScript library, to display overlays.
 
-**Demo:** https://m.thalmann.bz.it/prod/overlayjs/demo.html
+**Demo:** https://prod.thalmann.it/overlayjs/demo.html
 
 ## Navigation
 - [Installation](#installation)
